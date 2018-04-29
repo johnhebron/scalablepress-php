@@ -11,7 +11,7 @@ use GuzzleHttp\Psr7\Request;
 class Base
 {
 
-    const API_URL = "https://api.scalablepress.com/v2/";
+    const API_URL = "https://api.scalablepress.com";
 
     protected $client;
     protected $api_key;
