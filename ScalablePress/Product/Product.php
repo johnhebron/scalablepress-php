@@ -1,17 +1,17 @@
 <?php
 
-namespace ScalablePress\Search;
+namespace ScalablePress\Product;
 /**
  * 
  */
-class Search extends \ScalablePress\Base
+class Product extends \ScalablePress\Base
 {
 
     public function listCategories()
     {
         try{
             $url = "/v2/categories";
-            $response = $this->callScalablePress("get",$url,$value);
+            $response = $this->callWithoutAuth("get",$url,$value);
             return $response;
         } catch (RequestException $e) {
             $response = $this->StatusCodeHandling($e);

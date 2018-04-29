@@ -27,7 +27,7 @@ class Base
         $this->api_key = $key;
     }
 
-    protected function callScalablePress($method,$request,$post = [])
+    protected function callWithAuth($method,$request,$post = [])
     {
         try{
             $url = self::API_URL . $request;
@@ -39,6 +39,19 @@ class Base
             return $response;
         }
     }
+
+    protected function callWithoutAuth($method,$request,$post = [])
+    {
+        try{
+            $url = self::API_URL . $request;
+            $response = $this->client->request($method,$url, array('query' => $post,'headers' => $headers));
+            return json_decode($response->getBody()->getContents());
+        } catch (RequestException $e) {
+            $response = $this->StatusCodeHandling($e);
+            return $response;
+        }
+    }
+
     protected function statusCodeHandling($e)
     {
         $response = array("statuscode" => $e->getResponse()->getStatusCode(),
